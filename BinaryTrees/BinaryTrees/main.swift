@@ -24,3 +24,4 @@ func createTree() -> BinaryNode<Int>
 }
 
 let tree = createTree()
+print(tree)
