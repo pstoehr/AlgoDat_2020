@@ -5,11 +5,11 @@
 
 import Foundation
 
-public class BinaryNode<Element> {
-  public var value: Element
+public class BinaryNode<T> {
+  public var value: T
   public var leftChild: BinaryNode?
   public var rightChild: BinaryNode?
-  public init(value: Element) {
+  public init(value: T) {
     self.value = value
   }
 }
