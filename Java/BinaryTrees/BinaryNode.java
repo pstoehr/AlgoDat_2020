@@ -15,6 +15,11 @@ public class BinaryNode<T> {
     {
         return desc(this, "", "", "");
     }
+
+    public T getValue()
+    {
+        return value;
+    }
     
     // Inspired by Knuth
     private String desc(BinaryNode<T> node, String top, String root, String bottom)
@@ -34,6 +39,10 @@ public class BinaryNode<T> {
                     bottom + "└──", 
                     bottom + " ");
     }
+    
+    // #####     #####     #####     #####     #####     #####     #####     #####
+    //      #####     #####     #####     #####     #####     #####     #####
+    // #####     #####     #####     #####     #####     #####     #####     #####
     
     public int hoehe()
     {
