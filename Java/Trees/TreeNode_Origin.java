@@ -27,15 +27,22 @@ public class TreeNode<T> {
 		for (TreeNode<T> node : children)
 			node.depthFirst(visit);
 	}
-	
+
+    // Reimplementierung fuer effiziente Dqueue
 	void breadthFirst(Consumer<TreeNode<T>> visit)
 	{
+		ArrayList<TreeNode<T>> queue = new ArrayList<TreeNode<T>>();
+		
 	}
     
 	public void printByLevel()
 	{
+		ArrayList<TreeNode<T>> queue = new ArrayList<TreeNode<T>>();
 	}
     
+    private int printCurrentLevel(int toBePrinted, ArrayList<TreeNode<T>> queue)
+    {
+    }
     
     
 }
