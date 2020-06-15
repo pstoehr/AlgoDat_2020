@@ -25,6 +25,9 @@ public class First {
         TreeNode<String> citrone = new TreeNode<String>("Citrone");
         TreeNode<String> orange = new TreeNode<String>("Orange");
         
+        TreeNode<String> sweet = new TreeNode<String>("Sweet");
+        TreeNode<String> sour = new TreeNode<String>("Sour");
+        
         beverages.add(hot);
         hot.add(tea);
         hot.add(coffee);
@@ -38,20 +41,22 @@ public class First {
         cold.add(milk);
         limo.add(citrone);
         limo.add(orange);   
-        
+/*        
+        citrone.add(sweet);
+        citrone.add(sour);
+*/
         return beverages; 
     }
-
-    
     static public void main(String args[])
     {
         First treeController = new First();
-        Consumer<TreeNode<Integer>> printNode = a -> {System.out.println(a.getValue());};
-        
         TreeNode<String> rootBeverages = treeController.createTree();
-        Consumer<TreeNode<String>> printNodeStr = a -> {System.out.println(a.getValue());};
-        rootBeverages.breadthFirst(printNodeStr); 
-        System.out.println();
-        rootBeverages.printByLevel();
+/*        rootBeverages.printByLevel();
+        
+        Consumer<TreeNode<String>> printNodeStr = a -> {System.out.print(a.getValue() + " ");};
+        rootBeverages.breadthFirst(printNodeStr);
+*/
+        System.out.println("true --> " + rootBeverages.isIn("Tea"));
+        System.out.println("false --> " + rootBeverages.isIn("Apple"));
     }
 }
