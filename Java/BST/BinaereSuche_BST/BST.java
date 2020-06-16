@@ -22,6 +22,17 @@ public class BST<T extends Comparable<? super T>> {
 
     public Boolean find(T value)
     {
-        return false;
+        BinaryNode<T> node;
+        
+        node = root;
+        while ((node != null) && (node.getValue() != value)) // Noch kein Java
+        {
+            if (value < node.getValue())
+                node = node.leftTree;
+            else 
+                node = node.rightTree;
+        }
+        
+        return (node!=null);
     }
 }
