@@ -104,7 +104,7 @@ public class BST<T extends Comparable<? super T>> {
 
     private T getMinValueOf(BinaryNode<T> forNode)
     {
-        return null;
+        return null;    // Just to keep the compiler happy
     }
 
     // #####     #####     #####     #####     #####     #####     #####
@@ -117,7 +117,7 @@ public class BST<T extends Comparable<? super T>> {
         BinaryNode<T> node;
         
         node = root;
-        while ((node != null) && (value.compareTo(node.getValue()) == 0))
+        while ((node != null) && (value.compareTo(node.getValue()) != 0))
         {
             if (value.compareTo(node.getValue()) < 0)
                 node = node.leftChild;
