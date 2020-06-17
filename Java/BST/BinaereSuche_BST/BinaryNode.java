@@ -10,10 +10,16 @@ public class BinaryNode<T> {
         value = v;
     }
     
-    T getValue()
+    public T getValue()
     {
         return this.value;
     }
+
+    public void setValue(T v)
+    {
+        this.value = v;
+    }
+    
     public String toString()
     {
         return desc(this, "", "", "");
