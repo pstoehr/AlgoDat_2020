@@ -1,6 +1,6 @@
 public class AVLTree<T extends Comparable<? super T>> {
     
-    private AVLNode<T> root;
+    public AVLNode<T> root;
     
     AVLTree()
     {
@@ -35,35 +35,11 @@ public class AVLTree<T extends Comparable<? super T>> {
         else
             currentNode.rightChild = _insertRec(currentNode.rightChild, value);
         
-        return currentNode;
+        AVLNode<T> balancedNode = balance(currentNode);
+        balancedNode.height = Math.max(balancedNode.leftHeight(), balancedNode.rightHeight()) + 1;
+        return balancedNode;
     }
     
-    public void insert(T value)
-    {
-        AVLNode<T> currentNode = root;
-        AVLNode<T> newNode = new AVLNode<T>(value);
-        
-        if (root == null)
-        {
-            root = newNode;
-            return;
-        }
-        
-        AVLNode<T> parent = null;
-        while (currentNode != null)
-        {
-            parent = currentNode;
-            if (value.compareTo(currentNode.getValue()) < 0)
-                currentNode = currentNode.leftChild;
-            else
-                currentNode = currentNode.rightChild;            
-        }
-        if (value.compareTo(parent.getValue()) < 0)     // >
-            parent.leftChild = newNode;
-        else
-            parent.rightChild = newNode;
-            
-    }
     
     // #####     #####     #####     #####     #####     #####     #####     #####
     //      #####     #####     #####     #####     #####     #####     #####
@@ -112,7 +88,9 @@ public class AVLTree<T extends Comparable<? super T>> {
         else
             currentNode.rightChild = _delete(currentNode.rightChild, value);
                
-        return currentNode;
+        AVLNode<T> balancedNode = balance(currentNode);
+        balancedNode.height = Math.max(balancedNode.leftHeight(), balancedNode.rightHeight()) + 1;
+        return balancedNode;
     }
     
     private T getMinValue(AVLNode<T> forNode)
@@ -122,5 +100,57 @@ public class AVLTree<T extends Comparable<? super T>> {
             forNode = forNode.leftChild;
         }
         return forNode.getValue();
+    }
+    
+    // #####     #####     #####     #####     #####     #####     #####     #####
+    //      #####     #####     #####     #####     #####     #####     #####
+    // #####     #####     #####     #####     #####     #####     #####     #####
+
+    private AVLNode<T> leftRotation(AVLNode<T> node)
+    {
+        AVLNode<T> pivot = node.rightChild;
+        node.rightChild = pivot.leftChild;
+        pivot.leftChild = node;
+        
+        node.height = Math.max(node.leftHeight(), node.rightHeight()) + 1;
+        pivot.height = Math.max(pivot.leftHeight(), pivot.rightHeight()) + 1;
+        
+        return pivot;
+    }
+    
+    private AVLNode<T> rightRotation(AVLNode<T> node)
+    {
+        AVLNode<T> pivot = node.leftChild;
+        node.leftChild = pivot.rightChild;
+        pivot.rightChild = node;
+        
+        node.height = Math.max(node.leftHeight(), node.rightHeight()) + 1;
+        pivot.height = Math.max(pivot.leftHeight(), pivot.rightHeight()) + 1;
+        
+        return pivot;
+    }
+
+    
+    private AVLNode<T> rightLeftRotation(AVLNode<T> node)
+    {
+        if (node.rightChild == null) return node;
+
+        AVLNode<T> rightChild = node.rightChild;
+        node.rightChild = rightRotation(rightChild);
+        return leftRotation(node);
+    }
+
+    private AVLNode<T> leftRightRotation(AVLNode<T> node)
+    {
+        if (node.leftChild == null) return node;
+        
+        AVLNode<T> leftChild = node.leftChild;
+        node.leftChild = leftRotation(leftChild);
+        return rightRotation(node);
+    }
+
+    private AVLNode<T> balance(AVLNode<T> node)
+    {
+        return node;
     }
 }
