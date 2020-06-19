@@ -16,34 +16,31 @@ public class BST<T extends Comparable<? super T>> {
         return root.toString();
     }
     
-    // #####     #####     #####     #####     #####     #####     #####
-    //      #####     #####     #####     #####     #####     #####
-    // #####     #####     #####     #####     #####     #####     #####
+    // #####     #####     #####     #####     #####     #####     #####     #####
+    //      #####     #####     #####     #####     #####     #####     #####
+    // #####     #####     #####     #####     #####     #####     #####     #####
     
     public void insertRec(T value)
     {
         root = _insertRec(root, value);
     }
-
+    
     private BinaryNode<T> _insertRec(BinaryNode<T> currentNode, T value)
     {
-        // Auf Blattebene angekommen --> Knoten erzeugen
         if (currentNode == null) return new BinaryNode<T>(value);
         
         if (value.compareTo(currentNode.getValue()) < 0) // >
             currentNode.leftChild = _insertRec(currentNode.leftChild, value);
-        else 
+        else
             currentNode.rightChild = _insertRec(currentNode.rightChild, value);
         
         return currentNode;
     }
-
-    // #####     #####     #####     #####     #####     #####     #####
-
+    
     public void insert(T value)
     {
-        BinaryNode<T> newNode = new BinaryNode<T>(value);
         BinaryNode<T> currentNode = root;
+        BinaryNode<T> newNode = new BinaryNode<T>(value);
         
         if (root == null)
         {
@@ -52,27 +49,44 @@ public class BST<T extends Comparable<? super T>> {
         }
         
         BinaryNode<T> parent = null;
-        // Blattposition suchen
-        while(currentNode != null)
+        while (currentNode != null)
         {
             parent = currentNode;
-            if (value.compareTo(currentNode.getValue()) < 0) // >
+            if (value.compareTo(currentNode.getValue()) < 0)
                 currentNode = currentNode.leftChild;
-            else 
-                currentNode = currentNode.rightChild;
+            else
+                currentNode = currentNode.rightChild;            
         }
-        
-        // Knoten einfuegen
-        if (value.compareTo(parent.getValue()) < 0) // >
+        if (value.compareTo(parent.getValue()) < 0)     // >
             parent.leftChild = newNode;
         else
             parent.rightChild = newNode;
+            
     }
-
-    // #####     #####     #####     #####     #####     #####     #####
-    //      #####     #####     #####     #####     #####     #####
-    // #####     #####     #####     #####     #####     #####     #####    
-
+    
+    // #####     #####     #####     #####     #####     #####     #####     #####
+    //      #####     #####     #####     #####     #####     #####     #####
+    // #####     #####     #####     #####     #####     #####     #####     #####
+    
+    public Boolean isIn(T value)
+    {
+        BinaryNode<T> currentNode = root;  
+        
+        while ((currentNode != null) && (value.compareTo(currentNode.getValue()) != 0))
+        {
+            if (value.compareTo(currentNode.getValue()) < 0)
+                currentNode = currentNode.leftChild;
+            else
+                currentNode = currentNode.rightChild;            
+        }
+        
+        return (currentNode != null);
+    }
+    
+    // #####     #####     #####     #####     #####     #####     #####     #####
+    //      #####     #####     #####     #####     #####     #####     #####
+    // #####     #####     #####     #####     #####     #####     #####     #####
+    
     public void delete(T value)
     {
         root = _delete(root, value);
@@ -84,13 +98,11 @@ public class BST<T extends Comparable<? super T>> {
 
         if (value.compareTo(currentNode.getValue()) == 0)
         {
-            // Kein Kind
             if ((currentNode.leftChild == null) && (currentNode.rightChild == null)) return null;
-            // Ein Kind
             if (currentNode.leftChild == null) return currentNode.rightChild;
             if (currentNode.rightChild == null) return currentNode.leftChild;
-            // Zwei Kinder
-            T replacement = getMinValueOf(currentNode.rightChild);
+
+            T replacement = getMinValue(currentNode.rightChild);
             currentNode.setValue(replacement);
             currentNode.rightChild = _delete(currentNode.rightChild, replacement);
         }
@@ -101,30 +113,13 @@ public class BST<T extends Comparable<? super T>> {
                
         return currentNode;
     }
-
-    private T getMinValueOf(BinaryNode<T> forNode)
-    {
-        return null;    // Just to keep the compiler happy
-    }
-
-    // #####     #####     #####     #####     #####     #####     #####
-    //      #####     #####     #####     #####     #####     #####
-    // #####     #####     #####     #####     #####     #####     #####    
-
     
-    public Boolean find(T value)
+    private T getMinValue(BinaryNode<T> forNode)
     {
-        BinaryNode<T> node;
-        
-        node = root;
-        while ((node != null) && (value.compareTo(node.getValue()) != 0))
+        while(forNode.leftChild != null)
         {
-            if (value.compareTo(node.getValue()) < 0)
-                node = node.leftChild;
-            else 
-                node = node.rightChild;
+            forNode = forNode.leftChild;
         }
-        
-        return (node!=null);
+        return forNode.getValue();
     }
 }

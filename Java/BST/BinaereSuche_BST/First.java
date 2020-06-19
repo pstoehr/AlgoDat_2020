@@ -2,30 +2,12 @@ public class First {
     
     public static void main(String args[])
     {
-        BST<Integer> l = new BST<Integer>();
-        for (int i=0; i<5; i++)
-            l.insert(i);
-        System.out.println(l);
-        
-        int values[] = {3,1,4,0,2};
-        BST<Integer> b = new BST<Integer>();
-        for (int v : values)
-            b.insert(v);
-        System.out.println(b);
-
-        System.out.println();
-        
-        BST<Integer> lr = new BST<Integer>();
-        for (int i=0; i<5; i++)
-            lr.insertRec(i);
-        System.out.println(lr);
-        
-        BST<Integer> br = new BST<Integer>();
-        for (int v : values)
-            br.insertRec(v);
-        System.out.println(br);
-        
-        br.delete(1);
-        System.out.println(br);
+        int complexContent[] = {50, 25, 12, 10, 17, 37, 32, 27, 33, 45, 75, 87};
+        BST<Integer> complexTree = new BST<Integer>();
+        for (int v : complexContent)
+            complexTree.insert(v);
+        System.out.println(complexTree);
+        complexTree.delete(25);
+        System.out.println(complexTree);
     }
 }
