@@ -42,6 +42,11 @@ public class AVLNode<T> {
                     bottom + " ");
     }
     
+    public String toString()
+    {
+        return desc(this, "", "", "");
+    }
+    
     // #####     #####    #####     #####     #####     #####     #####     #####
     //      #####     #####    #####     #####     #####     #####     #####
     // #####    #####     #####     #####     #####     #####     #####     #####
@@ -90,9 +95,7 @@ public class AVLNode<T> {
     {
         return leftHeight() - rightHeight();
     }
+
+    // #####     #####     #####     #####     #####     #####     #####
     
-    public String toString()
-    {
-        return desc(this, "", "", "");
-    }
 }
