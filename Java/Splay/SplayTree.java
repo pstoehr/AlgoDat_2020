@@ -28,6 +28,7 @@ public class SplayTree<T extends Comparable<? super T>> {
     
     private SplayNode<T> _insertRec(SplayNode<T> currentNode, T value)
     {
+        // How to find currentNode
         if (currentNode == null) return new SplayNode<T>(value);
         
         if (value.compareTo(currentNode.getValue()) < 0) // >
@@ -35,6 +36,7 @@ public class SplayTree<T extends Comparable<? super T>> {
         else
             currentNode.rightChild = _insertRec(currentNode.rightChild, value);  
         
+        // splaying for currentNode
         return currentNode;      
     }
     
@@ -111,6 +113,17 @@ public class SplayTree<T extends Comparable<? super T>> {
     {
          return null;
     }    
+
+    public void printWayToNode(T value)
+    {
+        // Ausgabe der Knoten von der Wurzel zum Knoten mit "value"
+    }
+        
+    public void printWayBack(T value)
+    {
+        // Ausgabe von Wurzel rauf zum Knoten
+    }
+    
 }
 
 

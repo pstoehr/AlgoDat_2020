@@ -8,7 +8,29 @@ public class First {
             complexTree.insertRec(n);
         }
         System.out.println(complexTree+"\n");
-        complexTree.delete(7);
+        
+        System.out.println("To Node");
+        complexTree.printWayToNode(15);
+        System.out.println();
+
+        System.out.println("From Node");
+        complexTree.printWayBack(15);
+        System.out.println();
+        
+        // #####     #####     #####     #####     #####     #####
+        int nodes[] = {5,2,7,1,4,6,9,3,21,42};
+        complexTree = new SplayTree<Integer>();
+        for (int v : nodes)
+            complexTree.insertRec(v);
         System.out.println(complexTree+"\n");
+        
+        System.out.println("To Node");
+        complexTree.printWayToNode(3);
+        System.out.println();
+
+        System.out.println("From Node");
+        complexTree.printWayBack(3);
+        System.out.println();
+
     }
 }
