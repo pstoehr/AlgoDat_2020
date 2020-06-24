@@ -42,6 +42,7 @@ public class SplayTree<T extends Comparable<? super T>> {
     
     public void insert(T value)
     {
+        
         if (root == null) 
         {
             root = new SplayNode<T>(value); 
@@ -50,7 +51,10 @@ public class SplayTree<T extends Comparable<? super T>> {
 
         SplayNode<T> newNode = new SplayNode<T>(value);
         
+        // Knoten oder des Mutter in die Wurzel splayen
         root = splay(root, value);
+        
+        // Knoten und gesplayten Baum zusammenbauen
         if (root.getValue().compareTo(value) >= 0)
         {
             newNode.rightChild = root;
@@ -84,7 +88,7 @@ public class SplayTree<T extends Comparable<? super T>> {
     {
         if (isIn(value))
         {
-            System.out.println("Wert jetzt in der Wurzel, bitte löschen");
+            System.out.println("Wert jetzt in der Wurzel, bitte loeschen");
         }
     }
     /*
@@ -145,16 +149,16 @@ public class SplayTree<T extends Comparable<? super T>> {
             {  
                 node.leftChild.rightChild = splay(node.leftChild.rightChild, value);  
   
-                // Rotation für node.left  
+                // Rotation fuer node.left  
                 if (node.leftChild.rightChild != null)  
                     node.leftChild = leftRotation(node.leftChild);  
             }  
   
-            // Zweite Rotation für node  
+            // Zweite Rotation fuer node  
             if (node.leftChild == null) 
                 return node;
             else 
-                return rightRotation(root);  
+                return rightRotation(node);  
         }  
         else 
         {  
@@ -166,7 +170,7 @@ public class SplayTree<T extends Comparable<? super T>> {
             {  
                 node.rightChild.leftChild = splay(node.rightChild.leftChild, value);  
   
-                // Erste Rotation für node.right  
+                // Erste Rotation fuer node.right  
                 if (node.rightChild.leftChild != null)  
                     node.rightChild = rightRotation(node.rightChild);  
             }  
@@ -201,6 +205,10 @@ public class SplayTree<T extends Comparable<? super T>> {
         
         return pivot;
     }    
+
+    // #####     #####     #####     #####     #####     #####     #####     #####
+    //      #####     #####     #####     #####     #####     #####     #####
+    // #####     #####     #####     #####     #####     #####     #####     #####
 
     public void printWayToNode(T value)
     {
