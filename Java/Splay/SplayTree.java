@@ -106,12 +106,12 @@ public class SplayTree<T extends Comparable<? super T>> {
 
     private SplayNode<T> leftRotation(SplayNode<T> node)
     {
-         return null;
+        return null;
     }
-    
+
     private SplayNode<T> rightRotation(SplayNode<T> node)
     {
-         return null;
+        return null;
     }    
 
     public void printWayToNode(T value)
@@ -121,7 +121,7 @@ public class SplayTree<T extends Comparable<? super T>> {
         
     public void printWayBack(T value)
     {
-        // Ausgabe von Wurzel rauf zum Knoten
+        // Ausgabe von Knoten rauf zum Wurzel
     }
     
 }
