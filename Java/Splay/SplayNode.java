@@ -2,7 +2,6 @@ import java.util.function.Consumer;
 
 public class SplayNode<T> {
 
-    public int height = 0;
     private T value;
     
     public SplayNode<T> leftChild;
