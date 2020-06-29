@@ -3,12 +3,10 @@ public class First {
     public static void main(String args[])
     {
         AVLTree<Integer> complexTree = new AVLTree<Integer>();
-        for (int n=0; n<16; n += 1)
-        {
-            complexTree.insertRec(n);
-        }
-        System.out.println(complexTree+"\n");
-        complexTree.delete(7);
+        complexTree.insertRec(3);
+        complexTree.insertRec(3);
+        complexTree.insertRec(4);
+        
         System.out.println(complexTree+"\n");
     }
 }
