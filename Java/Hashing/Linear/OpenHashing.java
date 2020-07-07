@@ -53,6 +53,18 @@ public abstract class OpenHashing <T extends Comparable<? super T>> {
         int hashValue = baseHashValue;
 
         // Add Entry
+        int retry = 1;
+        while ((hashTable.get(hashValue) != null) && (retry < hashTableSize))
+        {
+            hashValue = (baseHashValue + nextHashingPos(retry, value)) % hashTableSize;
+            retry += 1;
+        }
+
+        if (hashTable.get(hashValue) == null)
+        {
+            hashTable.set(hashValue, value);
+            return true;
+        }
 
         return false;
     }
@@ -65,8 +77,19 @@ public abstract class OpenHashing <T extends Comparable<? super T>> {
         int hashValue = baseHashValue;
 
         // Find Entry
+        int retry = 1;
+        while ((hashTable.get(hashValue) != null) && (retry < hashTableSize))
+        {
+            // Element gefunden
+            T v = hashTable.get(hashValue);
+            if (v.compareTo(value) == 0) return true;
+            
+            // Naechstes ausprobieren
+            hashValue = (baseHashValue + nextHashingPos(retry, value)) % hashTableSize;
+            retry += 1;
+        }
         
-        return false;
+        return (hashTable.get(hashValue) != null);
     }
     
     public Boolean delete(T value)
