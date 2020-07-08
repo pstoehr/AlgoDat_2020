@@ -7,6 +7,6 @@ public class LinearHashing<T extends Comparable<? super T>> extends OpenHashing<
     
     int nextHashingPos(int retry, T value)
     {
-        return retry;
+        return retry; // return (i/2)*(i/2)*alternate
     }
 }

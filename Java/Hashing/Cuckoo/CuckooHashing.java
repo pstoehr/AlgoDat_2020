@@ -41,14 +41,25 @@ public class CuckooHashing <T extends Cuckooable> {
         if (isIn(value)) return false;  
         while (cnt < hashTableSize) {
             
+            contentBefore = hashTable0.get(toBeInserted.hash0());
+            hashTable0.set(toBeInserted.hash0(), toBeInserted);
+            if (contentBefore == null) return true;
+            
+            toBeInserted = contentBefore;
+            contentBefore = hashTable1.get(toBeInserted.hash1());
+            hashTable1.set(toBeInserted.hash1(), toBeInserted);
+            if (contentBefore == null) return true;
+
+            toBeInserted = contentBefore;
+            
             cnt += 1;
         }
         // Original paper
-        /* 
+        /*  
             rehash();
             insert(toBeInserted);
         */
-            return false;
+        return false;
     }
     
     public Boolean isIn(T value)
